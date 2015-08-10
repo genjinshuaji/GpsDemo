@@ -25,26 +25,28 @@ public class ReadXML {
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType) {
-                    case XmlPullParser.START_DOCUMENT://ÎÄµµ¿ªÊ¼ÊÂ¼þ,¿ÉÒÔ½øÐÐÊý¾Ý³õÊ¼»¯´¦Àí
+                    case XmlPullParser.START_DOCUMENT://ï¿½Äµï¿½ï¿½ï¿½Ê¼ï¿½Â¼ï¿½,ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                         persons = new ArrayList<GPXLocation>();
                         break;
 
-                    case XmlPullParser.START_TAG://¿ªÊ¼ÔªËØÊÂ¼þ
+                    case XmlPullParser.START_TAG://ï¿½ï¿½Ê¼Ôªï¿½ï¿½ï¿½Â¼ï¿½
                         String name = parser.getName();
                         if (name.equalsIgnoreCase("trkpt")) {
                             currentPerson = new GPXLocation();
                             currentPerson.setlat(new String(parser.getAttributeValue(null, "lat")));
                             currentPerson.setlon(new String(parser.getAttributeValue(null, "lon")));
                         } else if (currentPerson != null) {
-                            if (name.equalsIgnoreCase("name")) {
-                                //currentPerson.setName(parser.nextText());// Èç¹ûºóÃæÊÇTextÔªËØ,¼´·µ»ØËüµÄÖµ
-                            } else if (name.equalsIgnoreCase("age")) {
+                            if (name.equalsIgnoreCase("time")) {
+                                //currentPerson.setName(parser.nextText());// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TextÔªï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+                                currentPerson.settime(parser.nextText());
+                            } else if (name.equalsIgnoreCase("ele")) {
                                 //currentPerson.setAge(new Short(parser.nextText()));
+                                currentPerson.setele(parser.nextText());
                             }
                         }
                         break;
 
-                    case XmlPullParser.END_TAG://½áÊøÔªËØÊÂ¼þ
+                    case XmlPullParser.END_TAG://ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½Â¼ï¿½
                         if (parser.getName().equalsIgnoreCase("trkpt") && currentPerson != null) {
                             persons.add(currentPerson);
                             currentPerson = null;

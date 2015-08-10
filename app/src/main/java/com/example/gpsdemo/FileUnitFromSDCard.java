@@ -3,6 +3,7 @@ package com.example.gpsdemo;
 import org.apache.http.util.EncodingUtils;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.io.InputStream;
  */
 public class FileUnitFromSDCard {
     //写数据到SD中的文件
-    public void writeFileSdcardFile(String fileName,String write_str) throws IOException{
+    public static void writeFileSdcardFile(String fileName,String write_str) throws IOException{
         try{
 
             FileOutputStream fout = new FileOutputStream(fileName);
@@ -72,4 +73,11 @@ public class FileUnitFromSDCard {
         return in;
     }
 
+    public static void NewDir(String sDir)
+    {
+        File destDir = new File(sDir);
+        if (!destDir.exists()) {
+            destDir.mkdirs();
+        }
+    }
 }
